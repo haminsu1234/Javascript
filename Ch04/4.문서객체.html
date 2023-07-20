@@ -66,98 +66,185 @@
     <div class="box green"> box2</div>
     <div class="box"> box3</div>
 
-    <h4>문서객체 선택</h4>
+    <script>
+        //script가 위로가게 되면 순서에따라 script 적용 x script는 제일마지막 
+            const h3 =document.querySelector('h3'); // querySelector 로 h3상수가 'h3' 라는 태그선택
+            h3.style.color ='gray'; //css 정적 , js 는 동적
     
+            const seoul = document.querySelector('#seoul >span');//querySelector에서 css 선택자처럼 적용
+            seoul.style.color ='red';
+            
+            const daejeon =document.querySelector('ul > li:nth-child(2)');//css 에서 사용하는 선택자 다 적용되는듯
+            daejeon.style.color='orange';
+    
+            const busan=document.querySelector('ul >li:nth-child(4) > span');
+            busan.style.color='blue';
+    
+            const cities =document.querySelectorAll('.busan'); // 배열로생성댐 + 배열로 생성되긴하나 index값마다 다따로 해줘야함 
+            cities[0].style.color ='green';
+            cities[1].style.color ='green';
+            cities[2].style.color ='green';
+    
+            const daegu = document.getElementById('daegu'); // getElementById 자체가 id값을 선택하는것이므로 css 에서 쓰던 id 선택시 사용한 #사용x
+            daegu.style.color='brown'
+    
+            const seoulCities =document.getElementsByTagName('i');//선택자가 들어가는게 아니라 지정할 태그이름
+            
+            for(let city of seoulCities){
+                city.style.color='violet';
+            }
+            
+            //seoulCities.foreach((item)=>{item.style.color='violet'}
+            //);
+            
+            const bousanCities =document.getElementsByClassName('busan');//위의 id의 class 버전인듯? element 가복수형이면 배열+ getElement 계열은 css선택자 할필요없음
+            for(let city of bousanCities){
+                city.style.background='yellow';
+            }
+            
+    </script>
+    
+        <h4>문서객체 조작</h4>
+        <script>
+            //속성조작
+            const img=document.querySelectorAll('img');
+            img[0].src='./images/flower1.jpg';
+            img[0].alt='벗꽃';
+    
+      
+            img[1].src='./images/flower2.jpg';
+            img[1].alt='코스모스';
+    
+            //스타일조작
+            const box1=document.querySelector('.box1');
+            box1.style.display='inline-block';
+            box1.style.width= '100px';
+            box1.style.height= '100px';
+            box1.style.border='1px solid black';
+            box1.style.background='orange'
+    
+            const box2 =document.getElementsByClassName('box2');
+            box2[0].style.display='inline-block';
+            box2[0].style.width='100px';
+            box2[0].style.height='100px';
+            box2[0].style.border='1px solid black';
+            box2[0].style.backgroundColor='green'; //js에선 카멜표기법으로 해줘야댐
+            
+            //내용조작
+            const korea =document.querySelector('#korea');
+            
+            let text = korea.innerText;//태그내용의 텍스트 요소만 추출;
+            let html = korea.innerHTML;//태그내용의 태그요소와 텍스트 요소 추출;
+    
+            console.log('text : '+text);
+            console.log('html : '+html);
+    
+            document.write('text : '+text+'<br>');
+            document.write('html : '+html+'<br>');
+    
+            const contents =document.querySelectorAll('.content'); //복수형으로 들어가면 그냥 다 배열취급하는듯 all, s ,등등
+            contents[0].innerText ='<em>TEXT 내용입니다.</em>'; // 이건 '' 안에 태그가 들어있어도 텍스트문자취급
+            contents[1].innerHTML ='<em>HTML 내용입니다.</em>'; // 태그가들어가있으면 <>는 태그취급해서 태그요소가 적용됨
+            
+            //클래스 속성 조작
+            const boxs=document.getElementsByClassName('box'); //복수형에는 상수명을 복수로쓰는듯?
+            boxs[0].classList.add('red'); // 클래스는 하나의 태그에 다수의 클래스적용가능함 add는 지정한태그에 클래스를 추가하는기능인듯
+            boxs[1].classList.remove('green') // remove는 add와 반대기능 
+            boxs[2].classList.toggle('blue'); // toggle 없으면 해당클래스를 추가 있으면 제거 add+remove
+    
+            
+            
+    
+        </script>
+
+
+
+    <h4>문서객체  추가 /이동</h4>
+    <ul class="city">
+        <li><em>경기도</em><ol></ol></li>
+        <li><em>충청도</em><ol></ol></li>
+        <li><em>강원도</em><ol></ol></li>
+        <li>
+            <em>경상도</em>
+            <ol>
+                <li>창원</li>
+                <li>수원</li>
+                <li>목포</li>
+                <li>부여</li>
+                <li>원주</li>
+                <li>파주</li>
+            </ol>
+        </li>
+        <li><em>전라도</em><ol></ol></li>
+    </ul>
     <script>
-    //script가 위로가게 되면 순서에따라 script 적용 x script는 제일마지막 
-        const h3 =document.querySelector('h3'); // querySelector 로 h3상수가 'h3' 라는 태그선택
-        h3.style.color ='gray'; //css 정적 , js 는 동적
+        const gyeonggi =document.querySelector('.city > li:nth-child(1)>ol')
+        const chungchung =document.querySelector('.city > li:nth-child(2)>ol')
+        const gangwong =document.querySelector('.city > li:nth-child(3)>ol')
+        const gyeongsang =document.querySelector('.city > li:nth-child(4)>ol')
+        const jeonlla =document.querySelector('.city > li:nth-child(5)>ol')
 
-        const seoul = document.querySelector('#seoul >span');//querySelector에서 css 선택자처럼 적용
-        seoul.style.color ='red';
-        
-        const daejeon =document.querySelector('ul > li:nth-child(2)');//css 에서 사용하는 선택자 다 적용되는듯
-        daejeon.style.color='orange';
+        gyeonggi.insertAdjacentHTML('beforeend','<li>평택</li>'); // beforeend 는 end전에 삽입하는 태그
+        gyeonggi.insertAdjacentHTML('beforeend','<li>용인</li>'); // beforebegin,afterend
+        gyeonggi.insertAdjacentHTML('afterbegin','<li>성남</li>'); // afterbegin 시작점 바로뒤에 삽입
+        gyeonggi.insertAdjacentHTML('afterbegin','<li>화성</li>'); // ?
 
-        const busan=document.querySelector('ul >li:nth-child(4) > span');
-        busan.style.color='blue';
+        chungchung.insertAdjacentHTML('beforeend','<li>단양</li>');
+        gangwong.insertAdjacentHTML('beforeend','<li>춘천</li>');
+        jeonlla.insertAdjacentHTML('beforeend','<li>담양</li>');
 
-        const cities =document.querySelectorAll('.busan'); // 배열로생성댐 + 배열로 생성되긴하나 index값마다 다따로 해줘야함 
-        cities[0].style.color ='green';
-        cities[1].style.color ='green';
-        cities[2].style.color ='green';
+        const nodes =gyeongsang.getElementsByTagName('li');
+        const suwon = nodes[1];
+        const mokpo = nodes[2];
+        const boyeo = nodes[3];
+        const wonju = nodes[4];
+        const pajoo = nodes[5];
 
-        const daegu = document.getElementById('daegu'); // getElementById 자체가 id값을 선택하는것이므로 css 에서 쓰던 id 선택시 사용한 #사용x
-        daegu.style.color='brown'
+        gyeonggi.append(suwon); // 제일끝에
+        gyeonggi.prepend(pajoo);//제일 첨으로
+        jeonlla.append(mokpo);
+        chungchung.prepend(boyeo);
+        gangwong.append(wonju);
+    </script>
+    
+    <h4>문서객체 생성/삭제</h4>
 
-        const seoulCities =document.getElementsByTagName('i');//선택자가 들어가는게 아니라 지정할 태그이름
+    <section>
+
+        <h5>삭제할 예정입니다</h5>
+    </section>
+
+    <script>
+
+        const section = document.getElementsByTagName('section')[0];
+
+        const pNode=document.createElement('p')//태그생성해줌
+        pNode.id='txt'
+        pNode.innerText='동적으로 생성한 문단태그 p입니다';
+        section.appendChild(pNode);
+
+        const imgNode1 = document.createElement('img');
+        imgNode1.classList.add('img1');
+        imgNode1.setAttribute('src','./images/flower1.jpg');
+        imgNode1.setAttribute('alt','벚꽃');
         
-        for(let city of seoulCities){
-            city.style.color='violet';
-        }
         
-        //seoulCities.foreach((item)=>{item.style.color='violet'}
-        //);
         
-        const bousanCities =document.getElementsByClassName('busan');//위의 id의 class 버전인듯? element 가복수형이면 배열+ getElement 계열은 css선택자 할필요없음
-        for(let city of bousanCities){
-            city.style.background='yellow';
-        }
         
+        const imgNode2 = document.createElement('img');
+        imgNode2.classList.add('img2');
+        imgNode2.setAttribute('src','./images/flower2.jpg')
+        imgNode2.setAttribute('alt','코스모스')
+
+        section.appendChild(imgNode1);
+        section.insertBefore(imgNode2,imgNode1);
+
+        const h5=document.querySelector('h5');
+        h5.remove();
+
+
     </script>
 
-    <h4>문서객체 조작</h4>
-    <script>
-        //속성조작
-        const img=document.querySelectorAll('img');
-        img[0].src='./images/flower1.jpg';
-        img[0].alt='벗꽃';
-
-  
-        img[1].src='./images/flower2.jpg';
-        img[1].alt='코스모스';
-
-        //스타일조작
-        const box1=document.querySelector('.box1');
-        box1.style.display='inline-block';
-        box1.style.width= '100px';
-        box1.style.height= '100px';
-        box1.style.border='1px solid black';
-        box1.style.background='orange'
-
-        const box2 =document.getElementsByClassName('box2');
-        box2[0].style.display='inline-block';
-        box2[0].style.width='100px';
-        box2[0].style.height='100px';
-        box2[0].style.border='1px solid black';
-        box2[0].style.backgroundColor='green'; //js에선 카멜표기법으로 해줘야댐
-        
-        //내용조작
-        const korea =document.querySelector('#korea');
-        
-        let text = korea.innerText;//태그내용의 텍스트 요소만 추출;
-        let html = korea.innerHTML;//태그내용의 태그요소와 텍스트 요소 추출;
-
-        console.log('text : '+text);
-        console.log('html : '+html);
-
-        document.write('text : '+text+'<br>');
-        document.write('html : '+html+'<br>');
-
-        const contents =document.querySelectorAll('.content'); //복수형으로 들어가면 그냥 다 배열취급하는듯 all, s ,등등
-        contents[0].innerText ='<em>TEXT 내용입니다.</em>'; // 이건 '' 안에 태그가 들어있어도 텍스트문자취급
-        contents[1].innerHTML ='<em>HTML 내용입니다.</em>'; // 태그가들어가있으면 <>는 태그취급해서 태그요소가 적용됨
-        
-        //클래스 속성 조작
-        const boxs=document.getElementsByClassName('box'); //복수형에는 상수명을 복수로쓰는듯?
-        boxs[0].classList.add('red'); // 클래스는 하나의 태그에 다수의 클래스적용가능함 add는 지정한태그에 클래스를 추가하는기능인듯
-        boxs[1].classList.remove('green') // remove는 add와 반대기능 
-        boxs[2].classList.toggle('blue'); // toggle 없으면 해당클래스를 추가 있으면 제거 add+remove
-
-        
-        
-
-    </script>
 
 
 
