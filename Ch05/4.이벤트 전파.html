@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.이벤트전파</title>
+
+    <style>
+        div{
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .box1 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+        }
+
+        .box2{
+            width: 200px;
+            height: 200px;
+            border: 1px solid green;
+        }
+
+        
+        .box3{
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+        }
+    </style>
+
+    <script>
+        window.onload=function(){
+            const box1=document.getElementsByClassName('box1');
+            const box2=document.getElementsByClassName('box2');
+            const box3=document.getElementsByClassName('box3');
+            //이벤트 버블링
+            box1[0].addEventListener('click',function(e){
+                e.stopPropagation();
+                console.log('box1 click');
+            });
+            box2[0].addEventListener('click',function(e){
+                e.stopPropagation();
+                console.log('box2 click');
+            });
+            box3[0].addEventListener('click',function(e){
+                e.stopPropagation();//버블링 끊어주는 함수인듯? -> 
+                console.log('box3 click');
+            });// box3과 겹친속성이 다 클릭댐 -> 상위속성까지 다실행되는듯 -> 버블링
+
+            //캡처링 : 하위로 이벤트가 전파됨 버블링으 ㅣ반대
+
+            box1[1].addEventListener('click',function(e){
+                console.log('box1 실행');
+            },true);
+            box2[1].addEventListener('click',function(e){
+                console.log('box2 실행');
+            },true);
+            box3[1].addEventListener('click',function(e){
+                console.log('box3 실행');
+            },true);
+
+
+        };
+    </script>
+</head>
+<body>
+    <h3>4.이벤트전파</h3>
+
+    <h4>버블링</h4>
+    <div class="box1"> box1
+        <div class="box2"> box2
+            <div class="box3">box3
+
+            </div>
+        </div>
+    </div>
+
+    <h4>캡쳐링</h4>
+    <div class="box1">box1
+        <div class="box2">box2
+            <div class="box3">box3
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

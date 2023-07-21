@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.이벤트 종류</title>
+    <!--
+        날짜 : 2023/07/21
+        이름 : 하민수
+        재용 : 자바스크립트 이벤트 실습하기
+    -->
+    <style>
+        html{
+            width: 100%;
+            height: 2000px;
+
+        }
+
+        #content1 >p:nth-child(2){
+            position: fixed;
+            right: 40px;
+            top: 40px;
+        }
+
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+
+    </style>
+
+
+
+    <script>
+        console.log('here1...');
+
+        
+        //문서객체 생성불가 -> 이걸 먼저 실행하기때문에 btnTop이라는 id가 생성 안되었기때문
+
+        //문서로딩 이벤트 - HTML 문서 로딩 후 실행
+        window.onload =function(){
+            console.log('here2...'); //onload 가장 마지막에 실행됨 모든태그가 실행되고 난뒤
+            const btnTop=document.getElementById('btnTop');
+           //스크롤 상단이동 버튼
+            btnTop.onclick =function(){
+            
+                window.scrollTo(0,0);// 위에서부터 정해진 좌표로 스크롤이 가는듯?
+
+            };//여기서 생성해야 onload 특성때문에 해당코드가 제일 마지막에 실행되고 
+
+
+            //마우스 이벤트
+            const box=document.getElementsByClassName('box');
+            box[0].addEventListener('click',function(){
+                this.style.background ='red'//마우스를 때는순간
+            });
+            box[1].addEventListener('mousedown',function(){
+                this.style.background='blue' //마우스를 누르는순간 근데 이걸쓸일이 있나....?
+            });
+            box[2].addEventListener('mouseup',function(){
+                this.style.backgroundColor ='green'
+            });
+            box[3].addEventListener('mouseover',function(){
+                this.style.backgroundColor='orange'
+            });
+            box[4].addEventListener('mouseout',function(){
+                this.style.backgroundColor='yellow'
+            });
+            box[5].addEventListener('mouseover',function(){
+                this.backgroundColor='red'
+            });
+            box[5].addEventListener('mouseout',function(){
+                this.backgroundColor='blue'
+            });
+            box[6].addEventListener('mousemove',function(){
+                console.log('mousemove!')
+            });
+
+            //키보드 이벤트//input태그 네임속성
+            const inputUser=document.getElementsByName('user')[0];
+            const inputName=document.getElementsByName('name')[0];
+            const result=document.getElementsByClassName('result');
+
+            inputUser.addEventListener('keydown',function(){
+                console.log('keydown');
+                let value =this.value;
+                result[0].innerText=value;
+            });
+
+            inputName.addEventListener('keyup',function(){
+                console.log('keyup');
+                let value=this.value;
+                result[1].innerText=value;
+            });
+
+            //폼이벤트
+            const form =document.querySelector('#content4 > form');
+            const inputUid = document.getElementsByName('uid')[0];
+            const inputPass = document.getElementsByName('pass')[0];
+            const selectAddr = document.getElementsByName('addr')[0];
+            const print=document.getElementsByName('print');
+
+            inputUid.addEventListener('focus',function(){
+                console.log('focus');
+                print[0].innerText='focus'
+            });
+
+            inputPass.addEventListener('focusout',function(){
+                console.log('focusout')
+                print[1].innerText='focusout'
+            });
+
+            selectAddr.addEventListener('change',function(){
+                console.log('change')
+                print[2].innerText=this.value;
+            });
+
+            form.addEventListener('submit',function(){
+                console.log('submit')
+                alert('전송시작')
+            });
+
+        }; ////onload
+        //문서 리사이즈 이벤트 -브라우저 창크기가 바뀔때 실행
+        window.onresize =function(){
+            console.log('resize');
+            //이벤트 주체 -> window.onresize
+            let w =this.innerWidth;
+            let h =this.innerHeight;
+
+
+            const content1=document.getElementById('content1');
+            const span=content1.getElementsByTagName('span');
+
+            span[0].innerText=w;
+            span[1].innerText=h;
+
+        };
+        //스크롤 이벤트
+        window.onscroll=function(){
+            console.log('scroll');
+
+            let top =this.scrollY;
+
+            const content1=document.getElementById('content1');
+            const span=content1.getElementsByTagName('span');
+            span[2].innerText=top;
+
+
+        };
+
+
+
+
+
+
+    </script>
+
+
+
+</head>
+<body>
+    <h3>2.이벤트종류</h3>
+
+    <h4>문서 이벤트</h4>
+    <div id="content1">
+        <p>
+            가로: <span>0</span><br>
+            세로: <span>0</span><br>
+        </p>
+        <p>
+            위치: <span>0</span><br>
+            <button id="btnTop">상단이동</button>
+        </p>
+
+
+    </div>
+
+    <h4>마우스 이벤트</h4>
+    <div id="content2">
+        <div class="box box1">click</div>
+        <div class="box box2">mousedown</div>
+        <div class="box box3">mouseup</div>
+        <div class="box box4">mouseover</div>
+        <div class="box box5">mouserout</div>
+        <div class="box box6">hover</div>
+        <div class="box box7">mousermove</div>
+    </div>
+
+    <h4>키보드 이벤트</h4>   
+    <div id="content3">
+        <p>
+            <input type="text" name="user">
+            <span class="result"></span>
+        </p>        
+        <p>
+            <input type="text" name="name">
+            <span class="result"></span>
+        </p>
+
+
+
+    </div>
+    
+    <h4>폼 이벤트</h4>
+    <div id="content4">
+        <form action="#">
+
+            <p>
+                <input type="text" name="uid">
+                <span class="print"></span>
+            </p>
+            <p>
+                <input type="text" name="pass">
+                <span class="print"></span>
+            </p>
+            <p>
+                <section name="addr">
+                    <option>서울</option>
+                    <option>대전</option>
+                    <option>대구</option>
+                    <option>부산</option>
+                    <option>광주</option>
+                </section>
+                <span class="print"></span>
+            </p>
+            <input type="submit" value="전송">
+        </form>
+    </div>
+
+
+
+</body>
+</html>
+<script>
+    console.log('here3...')
+</script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.이벤트객체</title>
+    <style>
+        #container{
+            width: 600px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+
+        window.onload=function(){
+            const container = document.getElementById('container');
+            const span = document.getElementsByTagName('span');
+                                                    //콜백함수(핸들러)
+            container.addEventListener('mousemove',function(e){
+                span[0].innerText=e.clientX; //창을기준으로
+                span[1].innerText=e.clientY; //창을 기준으로
+                span[2].innerText=e.pageX; //html문서를 기준으로
+                span[3].innerText=e.pageY; //html 문서를 기준으로 스크롤이 있어야만 클라이언트 xy 와 차이가 있음
+                span[4].innerText=e.screenX; //window 화면에서의 좌표
+                span[5].innerText=e.screenY;
+                span[6].innerText=e.target;
+                span[7].innerText=e.timeStamp;//이벤트가 발생한 시간
+            });
+
+            //기본이벤트 해제
+
+            const a=document.getElementsByTagName('a')
+            const form=document.getElementsByTagName('form')[0];
+
+            a[0].onclick=function(e){
+                e.preventDefault();//기본이벤트 해제 
+                alert('네이버클릭!')
+                //return false 고전방식에서는 반환값 false 줘도 동일한 기능함 표준방식에서는 작동안댐;
+            }
+
+            a[1].addEventListener('click',(e)=>{
+                e.preventDefault();
+                alert('다음클릭');
+                
+            })
+
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                alert('전송시작')
+            };
+
+
+
+        };
+
+    </script>
+</head>
+<body>
+    <h3>3.이벤트객체</h3>
+
+    <div id="container" ></div>
+    <p>
+        clienX : <span>0</span><br>
+        clienY : <span>0</span><br>
+        pageX : <span>0</span><br>
+        pageY : <span>0</span><br>
+        screenX : <span>0</span><br>
+        screenY : <span>0</span><br>
+        target : <span>0</span><br>
+        timsStamp : <span>0</span><br>
+    </p>
+
+    <h4>기본이벤트 취소</h4>
+    <a href="https://naver.com">네이버</a>
+    <a href="https://daum.net">다음</a>
+
+    <form action="https://goolge.com">
+        <input type ="text" name="value">
+        <input type ="submit" name="전송">
+    </form>
+
+
+
+</body>
+</html>
