@@ -3,7 +3,6 @@ window.onload=function(){
 const todoList =document.getElementById('todoList');
 const inputTodo = document.getElementById('inputTodo');
 const btnAdd= document.getElementById('btnAdd');
-const btnDel = document.getElementById('btnDel');
 
 btnAdd.addEventListener('click',function(e){
 
