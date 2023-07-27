@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery소개</title>
+    <!--
+        날짜 :2023/07/26
+        이름 : 하민수
+        내용 : Js jQuery실습하기
+    -->
+    <script src="./js/jquery-3.7.0.min.js"></script>
+    <script>
+        //Javascript 처리
+        window.onload=function(){
+            const city=document.getElementById('city')
+            const li =city.getElementsByTagName('li');
+            li[0].style.color='red'
+        
+        
+        }
+        //JQuery 처리
+        $(document).ready(function(){
+            const li=$('#city > li:last-child').css('color','green');
+
+        });
+
+
+
+    </script>
+
+
+
+
+</head>
+<body>
+    <h3>1.jQuery소개</h3>
+    
+    <ul id="city">
+        <LI>서울</LI>
+        <LI>대전</LI>
+        <LI>대구</LI>
+        <LI>부산</LI>
+        <LI>광주</LI>
+    </u>
+
+
+</body>
+</html>
