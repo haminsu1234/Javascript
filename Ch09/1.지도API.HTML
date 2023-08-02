@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.지도 API</title>
+    <!--
+        날짜 : 2023/08/02
+        이름 : 하민수
+        내용 : 지도 API 실습하기
+    -->
+</head>
+<body>
+    <H3>지도API 실습</H3>
+
+    <h4>기본 지도 생성</h4>
+    <!-- 지도를 표시할 div 입니다 -->
+    <div id="map1" style="width:800px;height:350px;"></div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b1b7c51ffd11b507eda856479549dec"></script>
+    <script>
+        var mapContainer = document.getElementById('map1'), // 지도를 표시할 div 
+            mapOption = { 
+                center: new kakao.maps.LatLng(35.137100617521085, 129.09891189015042), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+    </script>
+
+    <div id="map2" style="width:800px;height:350px;"></div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b1b7c51ffd11b507eda856479549dec"></script>
+    <script>
+        var mapContainer = document.getElementById('map2'), // 지도를 표시할 div 
+            mapOption = { 
+                center: new kakao.maps.LatLng(35.137100617521085, 129.09891189015042), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(35.137100617521085, 129.09891189015042); 
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+
+        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+        // marker.setMap(null);    
+    </script>
+
+    <h4>해운대, 광안리, 송정해수욕장 마커표시</h4>
+    <div id="map3" style="width:600px;height:350px;"></div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b1b7c51ffd11b507eda856479549dec"></script>
+    <script>
+    var mapContainer = document.getElementById('map3'), // 지도를 표시할 div  
+        mapOption = { 
+            center: new kakao.maps.LatLng(35.137100617521085, 129.09891189015042), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+     
+    // 마커를 표시할 위치와 title 객체 배열입니다 
+    var positions = [
+        {
+            title: '해운대해수욕장', 
+            latlng: new kakao.maps.LatLng(35.15842136884322, 129.15993152844567)
+        },
+        {
+            title: '광안리해수욕장', 
+            latlng: new kakao.maps.LatLng(35.153182846838895, 129.11903123305925)
+        },
+        {
+            title: '송정해수욕장', 
+            latlng: new kakao.maps.LatLng(35.17923716819514, 129.20024697312192)
+        },
+    ];
+    
+
+        
+    for (var i = 0; i < positions.length; i ++) {
+        
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: positions[i].latlng, // 마커를 표시할 위치
+            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다 
+        });
+    }
+    var iwContent = '<div style="padding:5px;">해운대해수욕장 <br><a href="https://map.kakao.com/link/map/Hello World!,35.15842136884322, 129.15993152844567" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,35.15842136884322, 129.15993152844567" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    iwPosition = new kakao.maps.LatLng(35.15842136884322, 129.15993152844567); //인포윈도우 표시 위치입니다
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        position : iwPosition, 
+        content : iwContent 
+    });
+    </script>
+
+</body>
+</body>
+</html>
+
+
+
+
